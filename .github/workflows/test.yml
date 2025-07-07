@@ -3,7 +3,7 @@ name: Test on Feature Branches
 on:
   push:
     branches:
-      - 'feature/'
+      - 'feature/**'
 
 jobs:
   test:
