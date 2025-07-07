@@ -16,16 +16,27 @@ public class TicTacToe {
     }
 
     public void start() {
-        while (!hasWinner()) {
+        boolean playing = true;
+        while (playing) {
             System.out.println("Current player: " + currentPlayer.getMarker());
             board.print();
             int row = getInput("row (0-2): ");
             int col = getInput("column (0-2): ");
             if (board.isCellEmpty(row, col)) {
                 board.place(row, col, currentPlayer.getMarker());
-                switchCurrentPlayer();
+                if (hasWinner()) {
+                    board.print();
+                    System.out.println("Player " + currentPlayer.getMarker() + " has won!");
+                    playing = false;
+                } else if (board.isFull()) {
+                    board.print();
+                    System.out.println("Stalemate!");
+                    playing = false;
+                } else {
+                    switchCurrentPlayer();
+                }
             } else {
-                System.out.println("Position is occupied, please try again");
+                System.out.println("Position is occupied, please try again.");
             }
         }
     }
